@@ -4,10 +4,10 @@
         <meta charset="utf-8">
         <title>PySys</title>
         <style>
-            pre {
-                background-color: #FFA;
-                padding: 1.2em;
-            }
+         pre {
+             background-color: #FFA;
+             padding: 1.2em;
+         }
         </style>
     </head>
     <body>
@@ -17,6 +17,8 @@
         <br><br>
         <?php
         require("settings.php");
+
+        ob_implicit_flush(true);
         
         echo("Running $PYTHON as user " . exec('whoami'));
 
@@ -40,12 +42,16 @@ if __name__ == '__main__': main()";
         $title = str_replace(" ", "_", $title);
 
         $filename = "$folder/{$title}_{$timestamp}.py";
+        $filename = "$folder/{$title}.py";
 
         file_put_contents($filename, $pyScript);
 
         ?>
 
-        <pre><?php system("$PYTHON $filename 2>&1"); ?></pre>
+        <pre><?php system("timeout --signal=2 --kill-after 6 5 $PYTHON $filename 2>&1", $retval);
+             if ($retval == 2) {
+                 echo("\n\nProgram timed out.");
+             } ?></pre>
         <br>
         <a href="index.php">Write some more Python</a>
     </body>
