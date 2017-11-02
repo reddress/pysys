@@ -54,8 +54,8 @@
         ?>
         <br><br>
         <form name="form" action="run.php" method="POST">
-            <input type="button" value="Submit" onclick="aceSubmit(); this.disabled=true;"><br><br>
-            Title: <input type="text" size="32" name="title" value="<?= $title ?>" autofocus> only <code>main()</code> will be called.
+            <input type="button" id="submitButton" value="Submit" onclick="aceSubmit();"><br><br>
+            Title: <input type="text" id="titleText" size="32" name="title" value="<?= $title ?>" autofocus> only <code>main()</code> will be called.
 
             <br> 
             <br>
@@ -78,8 +78,13 @@
 
          var pyTextarea = document.getElementById("pyTextarea");
          function aceSubmit() {
-             pyTextarea.value = editor.getSession().getValue();
-             document.forms['form'].submit();
+             if (document.getElementById('titleText').value.trim() == "") {
+                 alert("Enter a title.");
+             } else {
+                 pyTextarea.value = editor.getSession().getValue();
+                 document.getElementById('submitButton').disabled = true;
+                 document.forms['form'].submit();
+             }
          }
         </script>
     </body>
