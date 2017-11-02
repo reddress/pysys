@@ -20,9 +20,11 @@
             foreach ($files as $file) {
                 if (strstr($file, ".py")) {
                     $title = str_replace(".py", "", $file);
-                    echo "<tr><td><a href='index.php?title=$title'>$title</a></td>";
-                    echo "<td>" . date("d/m/Y H:i", filemtime("data/$file")) . "</td>";
-                    echo '<td><a href="delete.php?title=' . $title . '">delete</a></td></tr>';
+                    if (trim($title) != "") {
+                        echo "<tr><td><a href='index.php?title=$title'>$title</a></td>";
+                        echo "<td>" . date("d/m/Y H:i", filemtime("data/$file")) . "</td>";
+                        echo '<td><a href="delete.php?title=' . $title . '">delete</a></td></tr>';
+                    }
                 }
             }
         } else {
