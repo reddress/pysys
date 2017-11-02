@@ -11,21 +11,13 @@
         </style>
     </head>
     <body>
-        <a href="index.php">Write some more Python</a>
-        <br>
-        Close this tab if an error is shown to go back to the code.
-        <br><br>
         <?php
         require("settings.php");
 
         ob_implicit_flush(true);
         
-        echo("Running $PYTHON as user " . exec('whoami'));
-
-        echo("<br>");
-        
         if (file_exists("data")) {
-            echo("Writing to folder data/");
+            echo("Writing to folder data/ <br><br>");
         } else {
             mkdir("data");
         }
@@ -48,11 +40,13 @@ if __name__ == '__main__': main()";
 
         ?>
 
-        <pre><?php system("timeout --signal=2 --kill-after 6 5 $PYTHON $filename 2>&1", $retval);
+        <a href="index.php?title=<?= $title ?>">Back to <?= $title ?></a>
+        
+        <pre><?php system("timeout --signal=2 --kill-after 4 3 $PYTHON $filename 2>&1", $retval);
              if ($retval == 2) {
                  echo("\n\nProgram timed out.");
              } ?></pre>
         <br>
-        <a href="index.php">Write some more Python</a>
+        <a href="index.php?title=<?= $title ?>">Back to <?= $title ?></a>
     </body>
 </html>

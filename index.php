@@ -23,9 +23,11 @@
     <body>
         <?php
         if (isset($_GET['title'])) {
-            $filename = $_GET['title'] . ".py";
+            $title = $_GET['title'];
+            $filename = $title . ".py";
             $filename = str_replace(" ", "_", $filename);
         } else{
+            $title = "";
             $filename = "scratch.py";
         }
 
@@ -42,11 +44,20 @@
 
         ?>
         
-        To do: Manage files, run existing files<br>
-        Enter Python code. Only the <code>main()</code> function will be called.<br><br>
-        <form name="form" target="_blank" action="run.php" method="POST">
-            <input type="button" value="Submit" onclick="aceSubmit()"><br><br>
-            Title: <input type="text" size="60" name="title" autofocus><br>
+        <a href="index.php">New file</a> |
+        <a href="ls.php">Load file</a>
+        
+        <?php
+        if ($title) {
+        echo("| <a href='delete.php?title=$title'>Delete $title</a>");
+        }
+        ?>
+        <br><br>
+        <form name="form" action="run.php" method="POST">
+            <input type="button" value="Submit" onclick="aceSubmit(); this.disabled=true;"><br><br>
+            Title: <input type="text" size="32" name="title" value="<?= $title ?>" autofocus> only <code>main()</code> will be called.
+
+            <br> 
             <br>
             <pre id="editor" name="py"><?= $code ?></pre>
             <textarea id="pyTextarea" name="py" style="display: none;"></textarea>
@@ -61,7 +72,8 @@
          editor.setOptions({
              enableBasicAutocompletion: true,
              enableSnippets: true,
-             enableLiveAutocompletion: false
+             enableLiveAutocompletion: false,
+             fontSize: "12pt",
          });
 
          var pyTextarea = document.getElementById("pyTextarea");
