@@ -62,7 +62,7 @@
             <pre id="editor" name="py"><?= $code ?></pre>
             <textarea id="pyTextarea" name="py" style="display: none;"></textarea>
         </form>
-        <script src="ace/ace.js"></script>
+        <script src="ace/ace-min.js"></script>
         <script src="ace/ext-language_tools.js"></script>
         <script>
          ace.require("ace/ext/language_tools");
