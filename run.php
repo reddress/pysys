@@ -42,7 +42,7 @@ if __name__ == '__main__': main()";
 
         <a href="index.php?title=<?= $title ?>">Back to <?= $title ?></a>
         
-        <pre><?php system("timeout --signal 2 --kill-after 4 3 $PYTHON $filename 2>&1", $retval);
+        <pre><?php system("timeout --signal=2 --kill-after=4 3 $PYTHON $filename 2>&1", $retval);
              if ($retval == 124) {
                  echo("\n\nProgram timed out.");
              } ?></pre>
