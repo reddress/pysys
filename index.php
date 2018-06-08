@@ -45,12 +45,14 @@
         ?>
         
         <a href="index.php">New file</a> |
-        <a href="ls.php">Load file</a>
+        <a href="ls.php">Load/Delete file</a>
         
         <?php
+        /*
         if ($title) {
         echo("| <a href='delete.php?title=$title'>Delete $title</a>");
         }
+        */
         ?>
         <br><br>
         <form name="form" action="run.php" method="POST">

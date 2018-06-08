@@ -10,7 +10,6 @@
         </style>
     </head>
     <body>
-        Load Python file<br><br>
         <a href="index.php">New file</a>
         <br><br>
         <table>
